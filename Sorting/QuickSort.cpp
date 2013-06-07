@@ -3,29 +3,26 @@
 #include<cstdlib>
 using namespace std;
 
-int selectMin(int *array, int low, int high)
+void quicksort(int *arr, int low, int high)
 {
-	int MIN=array[low];
-	while(++low<=high)
-		if(MIN>array[low])
-			MIN=array[low];
-	return MIN;
-}
-
-void selectsort(int *array, int n)
-{
-	int sorted_pos=0;
-	while(sorted_pos<n-1)
-	{
-		int selected_pos=selectMin(array,sorted_pos,n-1);
-		if(selected_pos!=sorted_pos)
-		{
-			int temp=array[selected_pos];
-			array[selected_pos]=array[sorted_pos];
-			array[sorted_pos]=temp;
-		}
-		++sorted_pos;
-	}
+   if(low>=high)   
+       return;
+   int pivot=arr[low];
+   int bklow=low;
+   int bkhigh=high;
+   while(low<high)
+    {
+       while(low<high&&arr[high]>=pivot)
+           --high;
+       arr[low]=arr[high];
+       while(low<high&&arr[low]<=pivot)
+           ++low;
+       arr[high]=arr[low];
+    }
+   arr[low]=pivot;
+   //以上部分也可单独写个partition函数，返回low值作为下面递归的参数
+   quicksort(arr,bklow,low-1);
+   quicksort(arr,low+1,bkhigh);  
 }
 
 int main()
@@ -41,7 +38,7 @@ int main()
         array[i]=input[i];
     }
     
-    selectsort(array,input.size());
+    quicksort(array,0,input.size()-1);
     for(int i=0;i<input.size();i++)
         cout<<array[i]<<" ";
 
