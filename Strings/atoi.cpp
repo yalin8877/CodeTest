@@ -1,6 +1,7 @@
 #include <stdio.h>
 #define INT_MAX (2147483647)
 #define INT_MIN (-2147483648)
+
 int atoi(const char *str)
 {
 	if (!str) return 0;
@@ -24,6 +25,7 @@ int atoi(const char *str)
 	}
 	return ((int)result) * sign;
 }
+
 int main(int argc, char *argv[])
 {
 	char * x1 = "-2147483648";
