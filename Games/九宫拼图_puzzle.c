@@ -11,7 +11,7 @@ struct node{
 int zx[4]={-1,0,1,0};
 int zy[4]={0,-1,0,1};
 int front,rear;
-int desti[4][4]={0,0,0,0,0,1,2,3,0,4,5,6,0,7,8,0};//目标状态 
+int desti[4][4]={0,0,0,0,0,1,2,3,0,4,5,6,0,7,8,0};
 
 int detect(struct node *p)
 {	
@@ -48,12 +48,12 @@ void printlj()
 
 int main()
 { 
-	//初始化
 	int i,j,m,n,f;
 	int temp,find=0;
 	front=rear=1;
 	path[1].pre=0; 
 	for(i=1;i<4;i++)
+	{
 		for(j=1;j<4;j++)
 		{
 			cin>>temp;
@@ -64,9 +64,8 @@ int main()
 				path[1].y=j;
 			}
 		}
+	}
 	
-	
-	//广度优先搜索
 	while(front<=rear&&!find)
 	{ 
 		m=path[front].x;
