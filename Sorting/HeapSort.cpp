@@ -10,47 +10,37 @@ void swap(int *arr, int i, int j)
 	arr[j]=temp;
 }
 
-void HeapAdjust_Recursive(int *arr, int i, int n)
+void ShiftDown_Recursive(int *arr, int i, int n)
 {
 	int left=2*i+1;
 	int right=2*i+2;
 
 	if(left>n-1)
 		return;
-	
-	if(left==n-1)
+	int max = i;
+	if(arr[left]>arr[max])
+		max = left;
+	if(right<n && arr[right]>arr[max])
+		max = right;
+	if(i != max)
 	{
-		if(arr[left]>arr[i])
-			swap(arr,left,i);
-	}
-	else if(arr[left]>arr[i]&&arr[left]>=arr[right])
-	{
-		swap(arr,left,i);
-		HeapAdjust_Recursive(arr,left,n);
-	}
-	else if(arr[right]>arr[i]&&arr[right]>=arr[i])
-	{
-		swap(arr,right,i);
-		HeapAdjust_Recursive(arr,right,n);
+		swap(arr, i, max);
+		ShiftDown_Recursive(arr,max,n);
 	}
 }
 
-void HeapAdjust(int *arr, int i, int n)
+void ShiftDown(int *arr, int i, int n)
 {
 	int left=2*i+1;
 	int right=2*i+2;
 	int max=i;
 	while(left<n)
 	{
-		if(arr[left]>arr[max])
-		{
+		if(arr[left] > arr[max])
 			max=left;
-		}
-		if(right<n&&arr[right]>arr[max])
-		{
+		if(right<n && arr[right]>arr[max])
 			max=right;
-		}
-		if(i!=max)
+		if(i != max)
 		{
 			swap(arr,i,max);
 			i=max;
@@ -58,7 +48,7 @@ void HeapAdjust(int *arr, int i, int n)
 			right=2*i+2;
 		}
 		else
-			break;
+			return;
 	}
 }
 
@@ -67,12 +57,12 @@ void HeapSort(int *arr, int n)
 	//Build Heap
 	int last_nleaf=n/2-1;
 	for(int i=last_nleaf;i>=0;--i)
-		HeapAdjust(arr,i,n);
+		ShiftDown_Recursive(arr,i,n);
 	
 	for(int last_sorted=n-1;last_sorted>0;--last_sorted)
 	{
 		swap(arr,last_sorted,0);
-		HeapAdjust(arr,0,last_sorted);//如写成 BuildHeap(arr,0,last_sorted); 就会得到倒序排列，但只是个trick，不应通过此方法来得到倒序，效率问题，自己体会一下～
+		ShiftDown_Recursive(arr,0,last_sorted);//如写成 ShiftDown(arr,0,last_sorted); 就会得到倒序排列，但只是个trick，不应通过此方法来得到倒序，效率问题，自己体会一下～
 	}
 }
 

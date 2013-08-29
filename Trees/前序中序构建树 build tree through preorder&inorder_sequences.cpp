@@ -10,7 +10,7 @@ struct Node
     Node* right;
 };
 
-char* find(char* arr,int n,char c)
+char* find(char* arr,int n,char c)//can replace with BinarySeach
 {
     for(int i=0;i<n;i++)
     {
