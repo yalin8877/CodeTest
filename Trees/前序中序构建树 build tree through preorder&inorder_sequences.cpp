@@ -19,6 +19,7 @@ char* find(char* arr,int n,char c)
     }
     return NULL;
 }
+
 void BuildTree(char* preOrder,char* inOrder,int n,Node*& root)
 {
     if(n==0)
