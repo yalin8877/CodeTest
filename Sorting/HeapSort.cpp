@@ -62,7 +62,7 @@ void HeapSort(int *arr, int n)
 	for(int last_sorted=n-1;last_sorted>0;--last_sorted)
 	{
 		swap(arr,last_sorted,0);
-		ShiftDown_Recursive(arr,0,last_sorted);//如写成 ShiftDown(arr,0,last_sorted); 就会得到倒序排列，但只是个trick，不应通过此方法来得到倒序，效率问题，自己体会一下～
+		ShiftDown_Recursive(arr,0,last_sorted);//如写成 ShiftDown(arr,0,n); 就会得到倒序排列，但只是个trick，不应通过此方法来得到倒序，效率问题，自己体会一下～
 	}
 }
 
